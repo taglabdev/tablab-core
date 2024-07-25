@@ -1,2 +1,2 @@
-# tablab-core
+# taglab-core
 Core library for taglab applications.
