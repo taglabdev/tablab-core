@@ -1,13 +1,18 @@
+# ==== DEPENDENCIES ====
+
+find_package(SQLiteCpp REQUIRED)
+
 # ==== BUILDING TARGET ====
 
-set(HEADERS)
+set(HEADERS taglab/library.h taglab/entry.h taglab/storage.h taglab/storage/sqlite.h)
 
-set(SOURCES greeter/greeter.h greeter/greeter.cpp)
+set(SOURCES taglab/entry.cpp taglab/storage/sqlite.cpp)
 
 list(TRANSFORM HEADERS PREPEND ${PROJECT_SOURCE_DIR}/include/)
 list(TRANSFORM SOURCES PREPEND ${PROJECT_SOURCE_DIR}/src/)
 
 add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} PRIVATE SQLiteCpp)
 target_include_directories(
     ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
                            $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>)

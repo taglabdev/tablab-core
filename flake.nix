@@ -33,6 +33,11 @@
             "${pkgs.callPackage ./tools/nix/cmake-scripts { }}/cmake"
           ];
 
+          buildInputs = with pkgs; [
+            sqlite
+            sqlitecpp
+          ];
+
           nativeBuildInputs = with pkgs; [
             cmake
             ninja
