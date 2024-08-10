@@ -1,14 +1,29 @@
 #include <taglab/storage/sqlite.h>
 
-using namespace std;
-using namespace SQLite;
+#include <format>
+#include <numeric>
+#include <ranges>
+
+namespace vws = std::ranges::views;
 using namespace taglab::storage;
 
-SQLiteStorage::SQLiteStorage(string_view path)
-    : db_{path, OPEN_READWRITE | OPEN_CREATE}
+SQLiteStorage::SQLiteStorage(std::string_view path)
+    : db_{path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE}
 {
     db_.exec("CREATE TABLE Entry (id INTEGER PRIMARY KEY AUTOINCREMENT, path VARCHAR(255) NOT "
              "NULL);");
+}
+
+void SQLiteStorage::addEntries(std::vector<Entry> const &entries)
+{
+    auto const values = entries | vws::transform([](auto const &entry) {
+                            return std::format("('{}')", entry.path.string());
+                        });
+    auto const valuesString = std::accumulate(
+            std::next(std::cbegin(values)), std::cend(values), *std::cbegin(values),
+            [](auto const &first, auto const &second) { return format("{},{}", first, second); });
+    auto const command = format("INSERT INTO Entry (path) VALUES {};", valuesString);
+    db_.exec(command);
 }
 
 SQLiteStorage SQLiteStorage::inMemory()

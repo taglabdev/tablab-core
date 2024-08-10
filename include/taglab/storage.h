@@ -1,9 +1,14 @@
 #pragma once
 
-#include <ranges>
+#include <vector>
 
-template <class StorageType>
-concept Storage = requires(StorageType storage, StorageType const storageConst)
+#include <taglab/entry.h>
+
+namespace taglab {
+
+class Storage
 {
-    { storage.addEntries(std::ranges::empty_view<int>{}) } -> std::same_as<void>;
+    virtual void addEntries(std::vector<Entry> const &entries) = 0;
+};
+
 };

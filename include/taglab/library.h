@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include <taglab/storage.h>
@@ -7,11 +8,10 @@
 
 namespace taglab {
 
-template<Storage StorageType>
 class Library
 {
 public:
-    Library(StorageType /* storage */) { }
+    Library(std::unique_ptr<Storage> /* storage */) { }
 
     std::vector<Entry> entries() const { return {}; }
 };

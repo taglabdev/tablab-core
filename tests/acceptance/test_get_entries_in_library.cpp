@@ -1,3 +1,4 @@
+#include <memory>
 #include <vector>
 
 #include <doctest/doctest.h>
@@ -15,8 +16,8 @@ TEST_CASE("get entries in library")
 {
     // ---- Given library with entries
     auto entries = vector<Entry>{{"test/file1"}, {"test/file2"}, {"test/file3"}};
-    auto storage = SQLiteStorage::inMemory();
-    storage.addEntries(entries);
+    auto storage = unique_ptr<SQLiteStorage>{new SQLiteStorage{SQLiteStorage::inMemory()}};
+    storage->addEntries(entries);
     auto library = Library{std::move(storage)};
 
     // ---- When entries retrieved
