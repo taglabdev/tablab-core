@@ -11,9 +11,12 @@ namespace taglab {
 class Library
 {
 public:
-    Library(std::unique_ptr<Storage> /* storage */) { }
+    Library(std::unique_ptr<Storage> storage);
 
-    std::vector<Entry> entries() const { return {}; }
+    std::vector<Entry> entries() const;
+
+private:
+    std::unique_ptr<Storage> storage_;
 };
 
 };

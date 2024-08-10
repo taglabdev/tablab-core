@@ -14,7 +14,8 @@ class SQLiteStorage : public Storage
 {
 public:
     SQLiteStorage(std::string_view path);
-    virtual ~SQLiteStorage() = default;
+
+    std::vector<Entry> entries() const override;
 
     void addEntries(std::vector<Entry> const &entries) override;
 
