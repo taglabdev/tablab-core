@@ -1,5 +1,7 @@
 #include <taglab/storage/sqlite.h>
 
+#include <SQLiteCpp/Transaction.h>
+
 #include <format>
 #include <numeric>
 #include <ranges>
@@ -10,8 +12,10 @@ using namespace taglab::storage;
 SQLiteStorage::SQLiteStorage(std::string_view path)
     : db_{path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE}
 {
+    auto transaction = SQLite::Transaction{db_};
     db_.exec("CREATE TABLE Entry (id INTEGER PRIMARY KEY AUTOINCREMENT, path VARCHAR(255) NOT "
              "NULL);");
+    transaction.commit();
 }
 
 void SQLiteStorage::addEntries(std::vector<Entry> const &entries)
@@ -23,7 +27,10 @@ void SQLiteStorage::addEntries(std::vector<Entry> const &entries)
             std::next(std::cbegin(values)), std::cend(values), *std::cbegin(values),
             [](auto const &first, auto const &second) { return format("{},{}", first, second); });
     auto const command = format("INSERT INTO Entry (path) VALUES {};", valuesString);
+
+    auto transaction = SQLite::Transaction{db_};
     db_.exec(command);
+    transaction.commit();
 }
 
 SQLiteStorage SQLiteStorage::inMemory()
