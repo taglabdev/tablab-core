@@ -32,6 +32,7 @@
             "${pkgs.callPackage ./tools/nix/format-cmake { }}/cmake"
             "${pkgs.callPackage ./tools/nix/cmake-scripts { }}/cmake"
           ];
+          NODE_PATH = "${pkgs.nodePackages."@commitlint/config-conventional"}/lib/node_modules";
 
           buildInputs = with pkgs; [
             sqlite
@@ -45,6 +46,9 @@
 
             clang-tools
             cmake-format
+            commitlint
+            nodePackages."@commitlint/config-conventional"
+            husky
           ];
 
           checkInputs = with pkgs; [ doctest ];

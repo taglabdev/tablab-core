@@ -27,6 +27,11 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+# ==== DEV ENV SETUP ====
+
+# set up husky git hooks
+execute_process(COMMAND git config --local core.hooksPath .husky)
+
 # ==== DEPENDENCIES ====
 
 set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH})
