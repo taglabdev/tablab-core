@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <filesystem>
+#include <ostream>
 #include <utility>
 
 #include <taglab/utils/concepts.h>
@@ -28,5 +29,7 @@ struct Location {
     {
     }
 };
+
+std::ostream &operator<<(std::ostream &os, Location const &location);
 
 };

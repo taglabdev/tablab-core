@@ -14,7 +14,7 @@ class Library
 public:
     Library(std::unique_ptr<Storage> storage);
 
-    void addLocation(Location location);
+    void addLocation(Location const &location);
 
     std::vector<Entry> entries() const;
     std::vector<Location> locations() const;

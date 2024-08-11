@@ -6,7 +6,6 @@
 #include <SQLiteCpp/Database.h>
 
 #include <taglab/storage.h>
-#include <taglab/entry.h>
 
 namespace taglab::storage {
 
@@ -16,8 +15,10 @@ public:
     SQLiteStorage(std::string_view path);
 
     void addEntries(std::vector<Entry> const &entries) override;
+    void addLocation(Location const &location) override;
 
     std::vector<Entry> entries() const override;
+    std::vector<Location> locations() const override;
 
     static SQLiteStorage inMemory();
 
