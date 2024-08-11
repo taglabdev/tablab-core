@@ -7,7 +7,16 @@ Library::Library(std::unique_ptr<Storage> storage)
 {
 }
 
+void Library::addLocation(Location /* location */)
+{
+}
+
 std::vector<Entry> Library::entries() const
 {
     return storage_->entries();
+}
+
+std::vector<Location> Library::locations() const
+{
+    return {};
 }

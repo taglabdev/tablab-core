@@ -8,6 +8,7 @@ set(HEADERS
     taglab/library.h
     taglab/entry.h
     taglab/storage.h
+    taglab/location.h
     taglab/utils/concepts.h
     taglab/utils/meta.h
     taglab/storage/sqlite.h)
