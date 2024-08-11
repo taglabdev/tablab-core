@@ -25,8 +25,6 @@ struct Entry {
         , path{std::forward<decltype(_path)>(_path)}
     {
     }
-
-    bool operator==(Entry const &other) const;
 };
 
 std::ostream &operator<<(std::ostream &os, Entry const &entry);

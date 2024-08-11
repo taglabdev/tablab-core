@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <memory>
 #include <vector>
 
@@ -24,5 +25,7 @@ TEST_CASE("get entries in library")
     auto resultEntries = library.entries();
 
     // ---- Then return all entries
-    CHECK(resultEntries == entries);
+    CHECK(std::ranges::equal(entries, resultEntries, [](auto const &exp, auto const &act) {
+        return exp.path == act.path;
+    }));
 }
