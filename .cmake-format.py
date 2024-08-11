@@ -8,6 +8,10 @@ with section("format"):
     # How many spaces to tab for indent
     tab_size = 4
 
+    # If a positional argument group contains more than this many arguments, then
+    # force it to a vertical layout.
+    max_pargs_hwrap = 5
+
     # Format command names consistently as 'lower' or 'upper' case
     command_case = "unchanged"
 
