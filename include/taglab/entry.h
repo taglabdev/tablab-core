@@ -3,7 +3,6 @@
 #include <concepts>
 #include <cstdint>
 #include <filesystem>
-#include <ostream>
 #include <utility>
 
 namespace taglab {
@@ -26,7 +25,5 @@ struct Entry {
     {
     }
 };
-
-std::ostream &operator<<(std::ostream &os, Entry const &entry);
 
 }; // taglab
