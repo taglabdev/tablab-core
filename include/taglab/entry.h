@@ -1,13 +1,9 @@
 #pragma once
 
-#include <concepts>
 #include <cstdint>
 #include <utility>
 
-#include <SQLiteCpp/Column.h>
-
 #include <taglab/utils/concepts.h>
-#include <taglab/utils/meta.h>
 
 namespace taglab {
 
@@ -15,9 +11,10 @@ struct Entry {
     int64_t id;
     std::filesystem::path path;
 
+    Entry() = default;
+
     template<class... Args>
     Entry(Args &&...args)
-        requires(noneOf(std::same_as<Args, SQLite::Column>...))
         : Entry{{}, std::forward<Args>(args)...}
     {
     }

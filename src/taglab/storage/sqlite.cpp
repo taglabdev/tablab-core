@@ -7,7 +7,6 @@
 #include <format>
 #include <numeric>
 #include <ranges>
-#include <tuple>
 
 namespace vws = std::ranges::views;
 using namespace taglab;
@@ -37,11 +36,13 @@ std::vector<Entry> SQLiteStorage::entries() const
     auto query = SQLite::Statement{db_, "SELECT * FROM Entry"};
     auto entries = std::vector<Entry>{};
     while (query.executeStep()) {
-        entries.emplace_back(query.getColumns<Entry, 2>());
+        auto entry = Entry{};
+        entry.id = query.getColumn(0);
+        entry.path = query.getColumn(1);
+        entries.push_back(std::move(entry));
     }
     return entries;
 }
-
 
 SQLiteStorage SQLiteStorage::inMemory()
 {

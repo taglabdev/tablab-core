@@ -4,10 +4,7 @@
 #include <filesystem>
 #include <utility>
 
-#include <SQLiteCpp/Column.h>
-
 #include <taglab/utils/concepts.h>
-#include <taglab/utils/meta.h>
 
 namespace taglab {
 
@@ -16,9 +13,10 @@ struct Location {
     std::string name;
     std::filesystem::path path;
 
+    Location() = default;
+
     template<class... Args>
     Location(Args &&...args)
-        requires(noneOf(std::same_as<Args, SQLite::Column>...))
         : Location{{}, std::forward<Args>(args)...}
     {
     }
