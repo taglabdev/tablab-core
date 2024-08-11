@@ -17,7 +17,7 @@ struct Entry {
 
     template<class... Args>
     Entry(Args &&...args)
-        requires(NoneOf(std::same_as<Args, SQLite::Column>...))
+        requires(noneOf(std::same_as<Args, SQLite::Column>...))
         : Entry{{}, std::forward<Args>(args)...}
     {
     }
