@@ -15,9 +15,9 @@ class SQLiteStorage : public Storage
 public:
     SQLiteStorage(std::string_view path);
 
-    std::vector<Entry> entries() const override;
-
     void addEntries(std::vector<Entry> const &entries) override;
+
+    std::vector<Entry> entries() const override;
 
     static SQLiteStorage inMemory();
 

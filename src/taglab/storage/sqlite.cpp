@@ -20,16 +20,6 @@ SQLiteStorage::SQLiteStorage(std::string_view path)
              "NULL);");
 }
 
-std::vector<Entry> SQLiteStorage::entries() const
-{
-    auto query = SQLite::Statement{db_, "SELECT * FROM Entry"};
-    auto entries = std::vector<Entry>{};
-    while (query.executeStep()) {
-        entries.emplace_back(query.getColumns<Entry, 2>());
-    }
-    return entries;
-}
-
 void SQLiteStorage::addEntries(std::vector<Entry> const &entries)
 {
     auto const values = entries | vws::transform([](auto const &entry) {
@@ -41,6 +31,17 @@ void SQLiteStorage::addEntries(std::vector<Entry> const &entries)
     auto const command = format("INSERT INTO Entry (path) VALUES {};", valuesString);
     db_.exec(command);
 }
+
+std::vector<Entry> SQLiteStorage::entries() const
+{
+    auto query = SQLite::Statement{db_, "SELECT * FROM Entry"};
+    auto entries = std::vector<Entry>{};
+    while (query.executeStep()) {
+        entries.emplace_back(query.getColumns<Entry, 2>());
+    }
+    return entries;
+}
+
 
 SQLiteStorage SQLiteStorage::inMemory()
 {
