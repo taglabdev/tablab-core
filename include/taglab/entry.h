@@ -1,14 +1,11 @@
 #pragma once
 
-#include <concepts>
 #include <cstdint>
-#include <filesystem>
 #include <utility>
 
-namespace taglab {
+#include <taglab/concepts.h>
 
-template<class T>
-concept Path = std::convertible_to<T, std::filesystem::path> || std::convertible_to<T, std::string>;
+namespace taglab {
 
 struct Entry {
     int64_t id;
