@@ -4,8 +4,13 @@ find_package(SQLiteCpp REQUIRED)
 
 # ==== BUILDING TARGET ====
 
-set(HEADERS taglab/library.h taglab/entry.h taglab/storage.h taglab/concepts.h
-            taglab/storage/sqlite.h)
+set(HEADERS
+    taglab/library.h
+    taglab/entry.h
+    taglab/storage.h
+    taglab/concepts.h
+    taglab/utils/meta.h
+    taglab/storage/sqlite.h)
 
 set(SOURCES taglab/library.cpp taglab/storage/sqlite.cpp)
 
