@@ -6,7 +6,7 @@
 
 #include <SQLiteCpp/Column.h>
 
-#include <taglab/concepts.h>
+#include <taglab/utils/concepts.h>
 #include <taglab/utils/meta.h>
 
 namespace taglab {
