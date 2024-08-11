@@ -1,4 +1,5 @@
 #include <SQLiteCpp/Statement.h>
+#include <cstdint>
 #include <taglab/storage/sqlite.h>
 
 #include <SQLiteCpp/Transaction.h>
@@ -6,6 +7,7 @@
 #include <format>
 #include <numeric>
 #include <ranges>
+#include <tuple>
 
 namespace vws = std::ranges::views;
 using namespace taglab;
@@ -23,7 +25,7 @@ std::vector<Entry> SQLiteStorage::entries() const
     auto query = SQLite::Statement{db_, "SELECT * FROM Entry"};
     auto entries = std::vector<Entry>{};
     while (query.executeStep()) {
-        entries.emplace_back(std::filesystem::path{query.getColumn(0)});
+        entries.emplace_back(query.getColumns<Entry, 2>());
     }
     return entries;
 }
