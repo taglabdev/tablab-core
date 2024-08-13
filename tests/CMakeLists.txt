@@ -11,7 +11,7 @@ find_package(doctest)
 
 # ==== BUILDING TARGET ====
 
-set(SOURCES main.cpp acceptance/test_locations_and_entries.cpp)
+set(SOURCES main.cpp test_locations_and_entries.cpp)
 
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 
