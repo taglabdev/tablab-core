@@ -1,15 +1,11 @@
-#include <memory>
-
 #include <doctest/doctest.h>
 
 #include <taglab/library.h>
-#include <taglab/storage/sqlite.h>
 
 #include "utils.h"
 
 using namespace std;
 using namespace taglab;
-using namespace taglab::storage;
 
 auto operator==(Location const &exp, Location const &act) -> bool
 {
@@ -19,7 +15,7 @@ auto operator==(Location const &exp, Location const &act) -> bool
 TEST_CASE("add location and get scanned entries")
 {
     // ---- Given library
-    auto library = Library{make_unique<SQLiteStorage>(SQLiteStorage::inMemory())};
+    auto library = Library::makeWithInMemoryStorage();
 
     // ---- When location is added
     auto const location = Location{"testloc", "somedir/testloc"};

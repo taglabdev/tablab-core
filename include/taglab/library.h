@@ -19,6 +19,9 @@ public:
     std::vector<Entry> entries() const;
     std::vector<Location> locations() const;
 
+    static Library makeWithDbStorage(std::filesystem::path const &path);
+    static Library makeWithInMemoryStorage();
+
 private:
     std::unique_ptr<Storage> storage_;
 };

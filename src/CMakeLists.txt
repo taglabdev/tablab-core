@@ -6,14 +6,14 @@ find_package(SQLiteCpp REQUIRED)
 
 set(HEADERS
     taglab/library.h
-    taglab/entry.h
     taglab/storage.h
+    taglab/entry.h
     taglab/location.h
     taglab/utils/concepts.h
-    taglab/utils/meta.h
-    taglab/storage/sqlite.h)
+    taglab/utils/meta.h)
 
-set(SOURCES taglab/library.cpp taglab/location.cpp taglab/storage/sqlite.cpp)
+set(SOURCES taglab/library.cpp taglab/location.cpp taglab/storage/sqlite.h
+            taglab/storage/sqlite.cpp)
 
 list(TRANSFORM HEADERS PREPEND ${PROJECT_SOURCE_DIR}/include/)
 list(TRANSFORM SOURCES PREPEND ${PROJECT_SOURCE_DIR}/src/)

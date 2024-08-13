@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <string_view>
 
 #include <SQLiteCpp/Database.h>
 
@@ -12,7 +11,7 @@ namespace taglab::storage {
 class SQLiteStorage : public Storage
 {
 public:
-    SQLiteStorage(std::string_view path);
+    SQLiteStorage(std::filesystem::path const &path);
 
     void addEntries(std::vector<Entry> const &entries) override;
     void addLocation(Location const &location) override;

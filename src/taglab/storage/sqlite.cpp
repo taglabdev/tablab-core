@@ -1,4 +1,4 @@
-#include <taglab/storage/sqlite.h>
+#include "sqlite.h"
 
 #include <SQLiteCpp/Transaction.h>
 #include <SQLiteCpp/Statement.h>
@@ -11,7 +11,7 @@ namespace vws = std::ranges::views;
 using namespace taglab;
 using namespace taglab::storage;
 
-SQLiteStorage::SQLiteStorage(std::string_view path)
+SQLiteStorage::SQLiteStorage(std::filesystem::path const &path)
     : db_{path, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE}
 {
     db_.exec("CREATE TABLE Entry ("

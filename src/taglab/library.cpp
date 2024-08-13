@@ -1,4 +1,7 @@
+#include <memory>
 #include <taglab/library.h>
+
+#include "storage/sqlite.h"
 
 using namespace taglab;
 
@@ -20,4 +23,14 @@ std::vector<Entry> Library::entries() const
 std::vector<Location> Library::locations() const
 {
     return storage_->locations();
+}
+
+Library Library::makeWithDbStorage(std::filesystem::path const &path)
+{
+    return Library{std::make_unique<storage::SQLiteStorage>(storage::SQLiteStorage{path})};
+}
+
+Library Library::makeWithInMemoryStorage()
+{
+    return Library{std::make_unique<storage::SQLiteStorage>(storage::SQLiteStorage::inMemory())};
 }
