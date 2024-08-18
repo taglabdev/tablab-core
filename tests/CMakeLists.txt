@@ -18,6 +18,10 @@ list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} doctest::doctest taglab-core)
 
+set(TEST_TEMP_DIR ${CMAKE_BINARY_DIR}/test_temp)
+file(MAKE_DIRECTORY ${TEST_TEMP_DIR})
+target_compile_definitions(${PROJECT_NAME} PUBLIC TEST_TEMP_DIR="${TEST_TEMP_DIR}")
+
 if(MSVC)
     target_compile_definitions(${PROJECT_NAME} PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
 endif()

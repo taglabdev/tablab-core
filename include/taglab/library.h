@@ -16,6 +16,9 @@ public:
 
     void addLocation(Location const &location);
 
+    /** temporarily synchronous for ease of implementation */
+    void scanLocations();
+
     std::vector<Entry> entries() const;
     std::vector<Location> locations() const;
 

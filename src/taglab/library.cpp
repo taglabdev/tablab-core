@@ -15,6 +15,10 @@ void Library::addLocation(Location const &location)
     storage_->addLocation(location);
 }
 
+void Library::scanLocations()
+{
+}
+
 std::vector<Entry> Library::entries() const
 {
     return storage_->entries();

@@ -17,7 +17,7 @@ struct Location {
     Location() = default;
 
     template<class... Args>
-    Location(Args &&...args)
+    explicit Location(Args &&...args)
         : Location{{}, std::forward<Args>(args)...}
     {
     }
